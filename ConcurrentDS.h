@@ -24,7 +24,7 @@ public:
     int read1(); // 10%
     int read2(); // 10%
     int read3(); // 5%
-    explicit operator std::string() const(ConcurrentDS); // 15%
+    //explicit operator std::string() const(ConcurrentDS &); // 15%
 };
 
 #endif //CONCURRENTDS_H

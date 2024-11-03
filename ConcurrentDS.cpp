@@ -45,7 +45,7 @@ int ConcurrentDS::read3() {
     return x;
 }
 
-ConcurrentDS::operator std::string() const(ConcurrentDS) {
+/*ConcurrentDS::operator std::string() const(ConcurrentDS) {
     std::string result = "";
     {
         std::scoped_lock lock(m1, m2, m3);
@@ -54,4 +54,4 @@ ConcurrentDS::operator std::string() const(ConcurrentDS) {
         }
     }
     return result;
-}
+}*/
