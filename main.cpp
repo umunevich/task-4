@@ -20,7 +20,7 @@ int main() {
     {
         std::jthread t1([](){generate_file("../test_files/test1", 30'000, REQUIREMENT);});
         std::jthread t2([](){generate_file("../test_files/test2", 30'000, EQUAL);});
-        std::jthread t3([](){generate_file("../test_files/test3", 30'000, OPPOSITE_REQUIREMENT);});
+        generate_file("../test_files/test3", 30'000, OPPOSITE_REQUIREMENT);
     }
 
 #endif
