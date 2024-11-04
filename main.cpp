@@ -22,7 +22,6 @@ int main() {
         std::jthread t2([](){generate_file("../test_files/test2", 30'000, EQUAL);});
         generate_file("../test_files/test3", 30'000, OPPOSITE_REQUIREMENT);
     }
-
 #endif
 
     auto* concurrent_ds = new ConcurrentDS();
