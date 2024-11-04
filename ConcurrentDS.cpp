@@ -14,7 +14,7 @@ void ConcurrentDS::write2(int x) {
 }
 
 void ConcurrentDS::write3(int x) {
-    std::lock_guard lock(m3);
+    std::unique_lock<std::shared_mutex> lock(m3);
     data[2] = x;
 }
 
@@ -39,19 +39,19 @@ int ConcurrentDS::read2() {
 int ConcurrentDS::read3() {
     int x;
     {
-        std::lock_guard lock(m3);
+        std::shared_lock<std::shared_mutex> lock(m3);
         x = data[2];
     }
     return x;
 }
 
-/*ConcurrentDS::operator std::string() const(ConcurrentDS) {
-    std::string result = "";
+ConcurrentDS::operator std::string() {
+    std::string result;
     {
         std::scoped_lock lock(m1, m2, m3);
         for (int i = 0; i < size; i++) {
-            result += data[i];
+            result += std::to_string(data[i]);
         }
     }
     return result;
-}*/
+}

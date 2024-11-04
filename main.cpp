@@ -1,7 +1,7 @@
 // main.cpp
 // Created by Yana Utochkina
 
-#define GENERATE_FILE;
+//#define GENERATE_FILE;
 
 #ifdef GENERATE_FILE
 #include "file_generator/generate_file.h"
@@ -25,4 +25,9 @@ int main() {
 
 #endif
 
+    auto* concurrent_ds = new ConcurrentDS();
+    {
+        std::jthread t1([&concurrent_ds](){concurrent_ds->read1();});
+        std::jthread t2([&concurrent_ds](){concurrent_ds->read1();});
+    }
 }
