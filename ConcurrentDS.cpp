@@ -31,7 +31,7 @@ int ConcurrentDS::read2() {
     int x;
     {
         std::lock_guard lock(m2);
-        x = data[1];
+        int x = data[1];
     }
     return x;
 }
@@ -40,7 +40,7 @@ int ConcurrentDS::read3() {
     int x;
     {
         std::shared_lock<std::shared_mutex> lock(m3);
-        x = data[2];
+        int x = data[2];
     }
     return x;
 }

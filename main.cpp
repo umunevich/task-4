@@ -1,7 +1,7 @@
 // main.cpp
 // Created by Yana Utochkina
 
-#define GENERATE_FILE;
+//#define GENERATE_FILE;
 
 #ifdef GENERATE_FILE
 #include "file_generator/generate_file.h"
@@ -9,6 +9,7 @@
 
 #ifndef GENERATE_FILE
 #include "ConcurrentDS.h"
+#include <functional>
 #endif
 
 #include <fstream>
@@ -31,6 +32,9 @@ int main() {
 #endif
 }
 
-void read_files(const int& num_files, std::ifstream& input_file...) {
-    
-}
+/*void& read_file(std::ifstream& ifile) {
+    std::string line;
+    while (!ifile.eof()) {
+        line = ifile.getline(line);
+    }
+}*/

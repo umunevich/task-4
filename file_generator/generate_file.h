@@ -12,7 +12,7 @@
 enum Distribution {
     REQUIREMENT,
     EQUAL,
-    OPPOSITE_REQUIREMENT
+    OPPOSITE
 };
 
 enum Operation {
