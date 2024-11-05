@@ -23,6 +23,46 @@ std::string get_action(const int& int_op) {
     return str_op;
 }
 
+void prepare_input_files() {
+    {
+        std::jthread t1([](){generate_file("../test_files/one/required", 30'000, REQUIREMENT);});
+        std::jthread t2([](){generate_file("../test_files/one/equal", 30'000, EQUAL);});
+        std::jthread t3([](){generate_file("../test_files/one/opposite", 30'000, OPPOSITE_REQUIREMENT);});
+    }
+    {
+        std::jthread t1([]() {
+            generate_file("../test_files/two/required/1", 15'000, REQUIREMENT);
+            generate_file("../test_files/two/required/2", 15'000, REQUIREMENT);
+        });
+        std::jthread t2([]() {
+            generate_file("../test_files/two/equal/1", 15'000, EQUAL);
+            generate_file("../test_files/two/equal/2", 15'000, EQUAL);
+        });
+        std::jthread t3([]() {
+            generate_file("../test_files/two/opposite/1", 15'000, OPPOSITE_REQUIREMENT);
+            generate_file("../test_files/two/opposite/2", 15'000, OPPOSITE_REQUIREMENT);
+        });
+    }
+    {
+        std::jthread t1([]() {
+            generate_file("../test_files/three/required/1", 10'000, REQUIREMENT);
+            generate_file("../test_files/three/required/2", 10'000, REQUIREMENT);
+            generate_file("../test_files/three/required/3", 10'000, REQUIREMENT);
+
+        });
+        std::jthread t2([]() {
+            generate_file("../test_files/three/equal/1", 10'000, EQUAL);
+            generate_file("../test_files/three/equal/2", 10'000, EQUAL);
+            generate_file("../test_files/three/equal/3", 10'000, EQUAL);
+        });
+        std::jthread t3([]() {
+            generate_file("../test_files/three/opposite/1", 10'000, OPPOSITE_REQUIREMENT);
+            generate_file("../test_files/three/opposite/2", 10'000, OPPOSITE_REQUIREMENT);
+            generate_file("../test_files/three/opposite/3", 10'000, OPPOSITE_REQUIREMENT);
+        });
+    }
+}
+
 void generate_file(const std::string&& name, const int&& size, const Distribution&& distribution) {
     std::ofstream ofile(name + ".txt");
 

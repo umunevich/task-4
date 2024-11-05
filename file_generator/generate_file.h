@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 #include <random>
+#include <thread>
 
 enum Distribution {
     REQUIREMENT,
@@ -20,6 +21,7 @@ enum Operation {
     STRING
 };
 
+void prepare_input_files();
 void generate_file(const std::string&&, const int&&, const Distribution&&);
 
 // probabilities
