@@ -22,7 +22,7 @@ void do_actions_in_three_threads(const std::string&& file_name1, const std::stri
 #include <thread>
 #include <sstream>
 #include <chrono>
-
+#include <barrier>
 #include <iostream>
 
 
@@ -114,17 +114,17 @@ void do_actions_in_one_thread(const std::string&& file_name, ConcurrentDS& concu
     operations = read_file(operations, concurrentDS, ifile);
     ifile.close();
 
-    auto start = std::chrono::system_clock::now();
     {
         std::jthread t([&operations]() {
+            auto start = std::chrono::system_clock::now();
             for (auto& function : operations) {
                 function();
             }
+            auto end = std::chrono::system_clock::now();
+            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+            std::cout  << "1. " << duration.count() << "ns" << std::endl;
         });
     }
-    auto end = std::chrono::system_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-    std::cout << duration.count() << "ns" << std::endl;
 }
 
 void do_actions_in_two_threads(const std::string&& file_name1, const std::string&& file_name2, ConcurrentDS& concurrentDS) {
@@ -137,22 +137,29 @@ void do_actions_in_two_threads(const std::string&& file_name1, const std::string
     ifile1.close();
     ifile2.close();
 
-    auto start = std::chrono::system_clock::now();
+    std::barrier barrier(2);
     {
-        std::jthread t1([&operations1]() {
-        for (auto& function : operations1) {
-        function();
-    }
-    });
-        std::jthread t2([&operations2]() {
+        std::jthread t1([&operations1, &barrier]() {
+            barrier.arrive_and_wait();
+
+            auto start = std::chrono::system_clock::now();
+            for (auto& function : operations1) {
+                function();
+            }
+            barrier.arrive_and_wait();
+            auto end = std::chrono::system_clock::now();
+            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+            std::cout << "2. " << duration.count() << "ns" << std::endl;
+        });
+        std::jthread t2([&operations2, &barrier]() {
+            barrier.arrive_and_wait();
+
             for (auto& function : operations2) {
                 function();
             }
+            barrier.arrive_and_wait();
         });
     }
-    auto end = std::chrono::system_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-    std::cout << duration.count() << "ns" << std::endl;
 }
 
 void do_actions_in_three_threads(const std::string&& file_name1, const std::string&& file_name2, const std::string&& file_name3, ConcurrentDS& concurrentDS) {
@@ -169,28 +176,36 @@ void do_actions_in_three_threads(const std::string&& file_name1, const std::stri
     ifile2.close();
     ifile3.close();
 
-    auto start = std::chrono::system_clock::now();
+    std::barrier barrier(3);
     {
-        std::jthread t1([&operations1]() {
-        for (auto& function : operations1) {
-        function();
-    }
-    });
-        std::jthread t2([&operations2]() {
+        std::jthread t1([&operations1, &barrier]() {
+            barrier.arrive_and_wait();
+
+            auto start = std::chrono::system_clock::now();
+            for (auto& function : operations1) {
+                function();
+            }
+            barrier.arrive_and_wait();
+            auto end = std::chrono::system_clock::now();
+            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+            std::cout << "3. " << duration.count() << "ns" << std::endl;
+        });
+
+        std::jthread t2([&operations2, &barrier]() {
+            barrier.arrive_and_wait();
+
             for (auto& function : operations2) {
                 function();
             }
+            barrier.arrive_and_wait();
         });
-        std::jthread t3([&operations3]() {
+        std::jthread t3([&operations3, &barrier]() {
+            barrier.arrive_and_wait();
             for (auto& function : operations3) {
                 function();
             }
+            barrier.arrive_and_wait();
         });
     }
-    auto end = std::chrono::system_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-    std::cout << duration.count() << "ns" << std::endl;
 }
-
 #endif
-
