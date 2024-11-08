@@ -5,4 +5,4 @@
 <img src="https://github.com/umunevich/task-4/blob/main/screenshots/Build.png"/>
 
 <h2>Результат виконання програми:</h2>
-<img src=""/>
+<img src="https://github.com/umunevich/task-4/blob/main/screenshots/Result.png"/>
