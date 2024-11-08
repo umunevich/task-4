@@ -34,28 +34,29 @@ int main() {
 
 #ifndef GENERATE_FILE
     auto concurrentDS = std::make_unique<ConcurrentDS>();
-    // In 1 thread:
-    //      a) with required probabilities:
+
+    std::cout << "  In 1 thread:" << std::endl;
+    std::cout << "      a) with required probabilities: ";
     do_actions_in_one_thread("required.txt", *concurrentDS);
-    //      b) with equal probabilities:
+    std::cout << "      b) with equal probabilities:    ";
     do_actions_in_one_thread("equal.txt", *concurrentDS);
-    //      c) with opposite probabilities:
+    std::cout << "      c) with opposite probabilities: ";
     do_actions_in_one_thread("opposite.txt", *concurrentDS);
 
-    // In 2 threads:
-    //      a) with required probabilities:
+    std::cout << "\n  In 2 threads:" << std::endl;
+    std::cout << "      a) with required probabilities: ";
     do_actions_in_two_threads("required/1.txt", "required/2.txt", *concurrentDS);
-    //      b) with equal probabilities:
+    std::cout << "      b) with equal probabilities:    ";
     do_actions_in_two_threads("equal/1.txt", "equal/2.txt", *concurrentDS);
-    //      c) with opposite probabilities:
+    std::cout << "      c) with opposite probabilities: ";
     do_actions_in_two_threads("opposite/1.txt", "opposite/2.txt", *concurrentDS);
 
-    // In 3 threads:
-    //      a) with required probabilities:
+    std::cout << "\n  In 3 threads:" << std::endl;
+    std::cout << "      a) with required probabilities: ";
     do_actions_in_three_threads("required/1.txt", "required/2.txt", "required/3.txt", *concurrentDS);
-    //      b) with equal probabilities:
+    std::cout << "      b) with equal probabilities:    ";
     do_actions_in_three_threads("equal/1.txt", "equal/2.txt", "equal/3.txt", *concurrentDS);
-    //      c) with opposite probabilities:
+    std::cout << "      c) with opposite probabilities: ";
     do_actions_in_three_threads("opposite/1.txt", "opposite/2.txt", "opposite/3.txt", *concurrentDS);
 #endif
 }
@@ -122,7 +123,7 @@ void do_actions_in_one_thread(const std::string&& file_name, ConcurrentDS& concu
             }
             auto end = std::chrono::system_clock::now();
             auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-            std::cout  << "1. " << duration.count() << "ns" << std::endl;
+            std::cout << duration.count() << "ns" << std::endl;
         });
     }
 }
@@ -149,7 +150,7 @@ void do_actions_in_two_threads(const std::string&& file_name1, const std::string
             barrier.arrive_and_wait();
             auto end = std::chrono::system_clock::now();
             auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-            std::cout << "2. " << duration.count() << "ns" << std::endl;
+            std::cout << duration.count() << "ns" << std::endl;
         });
         std::jthread t2([&operations2, &barrier]() {
             barrier.arrive_and_wait();
@@ -188,7 +189,7 @@ void do_actions_in_three_threads(const std::string&& file_name1, const std::stri
             barrier.arrive_and_wait();
             auto end = std::chrono::system_clock::now();
             auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-            std::cout << "3. " << duration.count() << "ns" << std::endl;
+            std::cout << duration.count() << "ns" << std::endl;
         });
 
         std::jthread t2([&operations2, &barrier]() {
