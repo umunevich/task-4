@@ -4,6 +4,11 @@
 #include "generate_file.h"
 #include <fstream>
 
+
+
+#include <iostream>
+
+
 std::string get_operation(const int& id) {
     switch (id) {
         case Operation::READ: return "read";

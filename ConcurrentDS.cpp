@@ -20,7 +20,7 @@ void ConcurrentDS::write2(int x) {
 
 void ConcurrentDS::write3(int x) {
     //std::cout << "write3 " << x << std::endl;
-    std::unique_lock<std::shared_mutex> lock(m3);
+    std::unique_lock<std::shared_mutex> lock(m3/*, std::defer_lock*/);
     data[2] = x;
 }
 

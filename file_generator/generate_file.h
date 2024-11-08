@@ -27,7 +27,7 @@ void generate_file(const std::string&&, const int&&, const Distribution&&);
 // probabilities
 const std::vector<int> required = {10, 10, 10, 10, 40, 5, 15};
 const std::vector<int> equal = {1, 1, 1, 1, 1, 1, 1};
-const std::vector<int> opposite = {90, 90, 90, 90, 60, 95, 85};
+const std::vector<int> opposite = {1, 1, 1, 1, 10, 95, 100};
 
 // operations
 const std::vector<int> numbers = {10 + READ, 10 + WRITE, 20 + READ, 20 + WRITE, 30 + READ, 30 + WRITE, STRING}; // {10, 11, 20, 21, 30, 31, 2 }
