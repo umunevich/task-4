@@ -8,6 +8,10 @@
 <img src="https://github.com/umunevich/task-4/blob/main/screenshots/Result.png"/>
 
 <h2>Вхідні файли:</h2>
+<p>В кожній директорії наведені файли з різними ймовірностями операцій.</p>
+<p>  а) частоти відповідають умові (required);</p>
+<p>  б) частоти рівні (equal);</p>
+<p>  в) частоти дуже сильно не відповідають умові (opposite);</p>
 <ul>
   <li><a href="https://github.com/umunevich/task-4/tree/main/test_files/one"> для одного потоку</a></li>
   <li><a href="https://github.com/umunevich/task-4/tree/main/test_files/two">для двох</a></li>
