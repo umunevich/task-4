@@ -6,3 +6,10 @@
 
 <h2>Результат виконання програми:</h2>
 <img src="https://github.com/umunevich/task-4/blob/main/screenshots/Result.png"/>
+
+<h2>Вхідні файли:</h2>
+<ul>
+  <li><a href="https://github.com/umunevich/task-4/tree/main/test_files/one"> для одного потоку</a></li>
+  <li><a href="https://github.com/umunevich/task-4/tree/main/test_files/two">для двох</a></li>
+  <li><a href="https://github.com/umunevich/task-4/tree/main/test_files/three">для трьох</a></li>
+</ul>
