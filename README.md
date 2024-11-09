@@ -9,9 +9,11 @@
 
 <h2>Вхідні файли:</h2>
 <p>В кожній директорії наведені файли з різними ймовірностями операцій.</p>
-<p>  а) частоти відповідають умові (required);</p>
-<p>  б) частоти рівні (equal);</p>
-<p>  в) частоти дуже сильно не відповідають умові (opposite);</p>
+<ol type="a">
+  <li>частоти відповідають умові (required);</li>
+  <li>частоти рівні (equal);</li>
+  <li>частоти дуже сильно не відповідають умові (opposite).</li>
+</ol>
 <ul>
   <li><a href="https://github.com/umunevich/task-4/tree/main/test_files/one"> для одного потоку</a></li>
   <li><a href="https://github.com/umunevich/task-4/tree/main/test_files/two">для двох</a></li>
